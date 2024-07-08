@@ -22,6 +22,37 @@ except Exception:
     exit(1)
 
 # correct range of accepted values
-if (n <= 4):
+if (n < 4):
     print("N must be at least 4")
     exit(1)
+
+def creat_board(n: int) -> list:
+    """
+    Create a 2D array representing a chessboard of size n x n.
+
+    Args:
+        n (int): The size of the chessboard.
+
+    Returns:
+        list: A 2D array representing the chessboard.
+
+    """
+    return [[0 for _ in range(n)] for x in range(n)]
+
+
+def check_safe_place(board: list, row: int, col: int, n: int):
+    """
+    Check if a queen can be placed on board[row][col].
+
+    Args:
+        board (list): The chessboard.
+        row (int): The row to check.
+        col (int): The column to check.
+        n (int): The size of the chessboard.
+
+    Returns:
+        bool: True if the queen can be placed, False otherwise.
+
+    """
+    if (board[row][col]):
+        return False
