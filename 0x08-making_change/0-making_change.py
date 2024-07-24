@@ -10,13 +10,10 @@ concepts and resources necessary to complete this project successfully.
 """
 
 
-from tempfile import tempdir
-from sqlalchemy import true
-
-
-def makeChange(coins, total):
+def makeChange(coins: list, total: int) -> int:
     """
-    Calculates the minimum number of coins required to make up a given total amount.
+    Calculates the minimum number of coins required to make up a given total
+    amount.
 
     Args:
         coins (list): A list of coin denominations.
@@ -32,12 +29,23 @@ def makeChange(coins, total):
     min_value = min(coins)
     if min_value > total:
         return -1
-    
-    coins = coins.sort(reversed=true)
-    print(coins)
-    total_temp = 0
+
+    # print(coins)
+    coins.sort(reverse=True)
+    # print(coins)
+    temp = 0
     i = 0
-    while total_temp < total:
-        total_temp += coins[i]
-        i += 1
-    print(total_temp)
+    c = 0
+    coins_length = len(coins)
+
+    while temp < total:
+        temp += coins[i]
+        c += 1
+        if temp > total:
+            temp -= coins[i]
+            c -= 1
+            i += 1
+            if i == coins_length:
+                return -1
+        elif temp == total:
+            return c
