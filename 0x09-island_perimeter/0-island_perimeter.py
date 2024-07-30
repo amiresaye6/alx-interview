@@ -33,15 +33,15 @@ def island_perimeter(grid):
             if grid[i][j] == 1:
                 if j + 1 == width or grid[i][j + 1] == 0:
                     p += 1
-                    print("found side cell: ({}, {})".format(i, j))
+                    # print("found side cell: ({}, {})".format(i, j))
                 if j - 1 < 0 or grid[i][j - 1] == 0:
                     p += 1
-                    print("found side cell: ({}, {})".format(i, j))
+                    # print("found side cell: ({}, {})".format(i, j))
                 if i + 1 == height or grid[i + 1][j] == 0:
                     p += 1
-                    print("found side cell: ({}, {})".format(i, j))
+                    # print("found side cell: ({}, {})".format(i, j))
                 if i - 1 < 0 or grid[i - 1][j] == 0:
                     p += 1
-                    print("found side cell: ({}, {})".format(i, j))
+                    # print("found side cell: ({}, {})".format(i, j))
 
     return p
