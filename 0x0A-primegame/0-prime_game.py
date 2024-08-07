@@ -14,7 +14,7 @@ def isPrime(number: int) -> bool:
     Returns:
         bool: True if the number is prime, False otherwise.
     """
-    for i in range(2, (number // 2) + 1):
+    for i in range(2, (number // 2)):
         if number % i == 0:
             return False
     return True
