@@ -14,7 +14,7 @@ def isPrime(number: int) -> bool:
     Returns:
         bool: True if the number is prime, False otherwise.
     """
-    for i in range(2, number):
+    for i in range(2, (number // 2) + 1):
         if number % i == 0:
             return False
     return True
@@ -31,6 +31,10 @@ def isWinner(x: int, nums: list) -> str:
     Returns:
         str: The name of the winner ("Maria" or "Ben").
     """
+    if x <= 0 or nums is None:
+        return None
+    if x != len(nums):
+        return None
     Maria = 0
     Ben = 0
     for round in nums:
