@@ -4,7 +4,29 @@ This module contains functions related to a prime game.
 """
 
 
-def sieve_of_eratosthenes(max_num: int) -> list:
+def isPrime(number: int) -> bool:
+    """
+    Check if a number is prime.
+
+    Args:
+        number (int): The number to check.
+
+    Returns:
+        bool: True if the number is prime, False otherwise.
+    """
+    if number < 2:
+        return False
+    if number == 2:
+        return True
+    if number % 2 == 0:
+        return False
+    for i in range(3, int(number**0.5) + 1, 2):
+        if number % i == 0:
+            return False
+    return True
+
+
+def my_sieve_of_eratosthenes(max_num: int) -> list:
     """
     Generate a list of booleans representing prime numbers up to max_num.
 
@@ -14,15 +36,12 @@ def sieve_of_eratosthenes(max_num: int) -> list:
     Returns:
         list: A list where True indicates a prime number.
     """
-    is_prime = [True] * (max_num + 1)
-    is_prime[0] = is_prime[1] = False
-
-    for start in range(2, int(max_num**0.5) + 1):
-        if is_prime[start]:
-            for multiple in range(start*start, max_num + 1, start):
-                is_prime[multiple] = False
-
-    return is_prime
+    primeLits = [True] * (max_num + 1)
+    primeLits[0], primeLits[1] = False, False
+    for num in range(2, max_num + 1):
+        if primeLits[num]:
+            primeLits[num] = isPrime(num)
+    return primeLits
 
 
 def isWinner(x, nums):
@@ -40,7 +59,7 @@ def isWinner(x, nums):
         return None
 
     max_num = max(nums)
-    is_prime = sieve_of_eratosthenes(max_num)
+    is_prime = my_sieve_of_eratosthenes(max_num)
 
     Maria = 0
     Ben = 0
