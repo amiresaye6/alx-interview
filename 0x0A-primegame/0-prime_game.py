@@ -4,23 +4,28 @@ This module contains functions related to a prime game.
 """
 
 
-def isPrime(number: int) -> bool:
+def sieve_of_eratosthenes(max_num: int) -> list:
     """
-    Check if a number is prime.
+    Generate a list of booleans representing prime numbers up to max_num.
 
     Args:
-        number (int): The number to check.
+        max_num (int): The maximum number to check for primes.
 
     Returns:
-        bool: True if the number is prime, False otherwise.
+        list: A list where True indicates a prime number.
     """
-    for i in range(2, (number // 2) + 1):
-        if number % i == 0:
-            return False
-    return True
+    is_prime = [True] * (max_num + 1)
+    is_prime[0] = is_prime[1] = False
+
+    for start in range(2, int(max_num**0.5) + 1):
+        if is_prime[start]:
+            for multiple in range(start*start, max_num + 1, start):
+                is_prime[multiple] = False
+
+    return is_prime
 
 
-def isWinner(x: int, nums: list) -> str:
+def isWinner(x, nums):
     """
     Determine the winner of the prime game.
 
@@ -31,27 +36,24 @@ def isWinner(x: int, nums: list) -> str:
     Returns:
         str: The name of the winner ("Maria" or "Ben").
     """
-    if x <= 0 or nums is None:
+    if x <= 0 or not nums:
         return None
-    if x != len(nums):
-        return None
+
+    max_num = max(nums)
+    is_prime = sieve_of_eratosthenes(max_num)
+
     Maria = 0
     Ben = 0
-    for round in nums:
-        if round == 2:
-            Maria += 1
-            continue
-        is_prime_counter = 0
-        for i in range(2, round):
-            if isPrime(i):
-                is_prime_counter += 1
 
-        if is_prime_counter % 2 == 0:
+    for n in nums:
+        prime_count = sum(is_prime[2:n+1])
+        if prime_count % 2 == 0:
             Ben += 1
         else:
             Maria += 1
+
     if Maria > Ben:
         return "Maria"
-    elif Maria < Ben:
+    elif Ben > Maria:
         return "Ben"
     return None
