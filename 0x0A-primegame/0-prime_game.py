@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
 """
-stuff for now
+This module contains functions related to a prime game.
 """
 
 
 def isPrime(number: int) -> bool:
     """
-    stuff for now
+    Check if a number is prime.
+
+    Args:
+        number (int): The number to check.
+
+    Returns:
+        bool: True if the number is prime, False otherwise.
     """
     for i in range(2, (number // 2) + 1):
         if number % i == 0:
@@ -14,9 +20,16 @@ def isPrime(number: int) -> bool:
     return True
 
 
-def isWinner(x: int, nums: list) -> None:
+def isWinner(x: int, nums: list) -> str:
     """
-    stuff for now
+    Determine the winner of the prime game.
+
+    Args:
+        x (int): The number of rounds.
+        nums (list): A list of numbers representing the rounds.
+
+    Returns:
+        str: The name of the winner ("Maria" or "Ben").
     """
     Maria = 0
     Ben = 0
@@ -34,7 +47,7 @@ def isWinner(x: int, nums: list) -> None:
         else:
             Maria += 1
     if Maria > Ben:
-        return("Maria")
+        return "Maria"
     elif Maria < Ben:
-        return("Ben")
+        return "Ben"
     return None
